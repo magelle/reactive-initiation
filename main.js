@@ -17,7 +17,13 @@ var requestStream = refreshClickStream
 
 var responseStream = requestStream
     .flatMap(function(requestUrl) {
-        return Rx.Observable.fromPromise(jQuery.getJSON(requestUrl));
+        return Rx.Observable.fromPromise($.ajax({
+            dataType: "json",
+            url: requestUrl,
+            headers: {
+                "Authorization": "Basic " + btoa("magelle" + ":" + "159630fdcd6ab45785d2e2e71c86c58c356c932a")
+            }
+        }));
     });
 
 
